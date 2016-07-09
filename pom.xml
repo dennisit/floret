@@ -9,8 +9,37 @@
     <name>floret</name>
     <url>http://maven.apache.org</url>
 
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:dennisit/floret.git</connection>
+        <developerConnection>scm:git:git@github.com:dennisit/floret.git</developerConnection>
+        <url>git@github.com:dennisit/floret.git</url>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>sonatype</id>
+            <name>Sonatype Groups</name>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.compiler-plugin>3.1</version.compiler-plugin>
+        <version.source-plugin>2.3</version.source-plugin>
+        <version.javadoc-plugin>2.9.1</version.javadoc-plugin>
+        <version.maven-gpg-plugin>1.5</version.maven-gpg-plugin>
+        <jdk.version>1.7</jdk.version>
         <spring-framework.verion>4.3.0.RELEASE</spring-framework.verion>
         <mybatis.version>3.4.1</mybatis.version>
         <fastjson.version>1.2.6</fastjson.version>
@@ -69,5 +98,51 @@
             <name>苏若年(qq:1325103287)</name>
         </developer>
     </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${version.source-plugin}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${version.javadoc-plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <links>
+                        <link>http://docs.oracle.com/javase/7/docs/api</link>
+                    </links>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
