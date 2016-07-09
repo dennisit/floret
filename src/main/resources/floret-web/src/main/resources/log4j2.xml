@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <Properties>
+        <Property name="logDir">./logs</Property>
+        <Property name="logName">floret</Property>
+        <Property name="LOG_PATTERN">%d{yyyy.MM.dd HH:mm:ss.SSS} [%thread] %level [%C{36}.%M:%L] [%t] - %msg%xEx%n</Property>
+    </Properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="\${LOG_PATTERN}"/>
+        </Console>
+        <RollingRandomAccessFile name="FloretLog" fileName="\${logDir}/\${logName}.log"
+                                 immediateFlush="true"
+                                 filePattern="\${logDir}/\${logName}/\${date:yyyyMMdd}/\${logName}-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="\${LOG_PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingRandomAccessFile>
+    </appenders>
+    <loggers>
+        <logger name="org.slf4j" level="INFO" />
+        <logger name="com.ibatis" level="ERROR" additivity="false">
+            <appender-ref ref="FloretLog"/>
+        </logger>
+        <logger name="org.mybatis" level="ERROR" additivity="false">
+            <appender-ref ref="FloretLog"/>
+        </logger>
+        <logger name="java.sql" level="ERROR" additivity="false">
+            <appender-ref ref="FloretLog"/>
+        </logger>
+        <logger name="${bean.packageName}" level="DEBUG" includeLocation="true"  additivity="true">
+            <appender-ref ref="FloretLog"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="FloretLog"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </loggers>
+</configuration>

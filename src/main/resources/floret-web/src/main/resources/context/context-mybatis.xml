@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="useColumnLabel" value="true" />
+        <setting name="useGeneratedKeys" value="false" />
+        <setting name="defaultExecutorType" value="SIMPLE" />
+    </settings>
+
+
+    <typeAliases>
+<%
+    for(bean in beans){
+%>
+        <typeAlias alias="${bean.className}" type="${bean.packageName}.domain.${bean.className}" />
+<%
+    }
+%>
+    </typeAliases>
+
+    <mappers>
+<%
+   for(bean in beans){
+%>
+        <mapper resource="sqlmap/${bean.className}Dao.xml"/>
+<%
+   }
+%>
+    </mappers>
+
+
+</configuration>

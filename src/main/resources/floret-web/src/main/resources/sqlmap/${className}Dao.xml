@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${bean.packageName}.repository.impl.${bean.className}DaoImpl">
+
+    <!-- 插入语句 -->
+    <insert id="insert" parameterType="${bean.className}" flushCache="true">
+        INSERT INTO ${bean.tableName} <include refid="insertCondition"/>
+    </insert>
+
+    <!-- 删除语句 -->
+    <select id="delete" parameterType="java.lang.Long" resultType="java.lang.Integer" flushCache="true" >
+        DELETE FROM ${bean.tableName} WHERE <%for(entry in bean.primaryAttributeContext){if(entryLP.index==1){%>${entry.key}=#{primaryKey}<%}}%>
+    </select>
+
+    <!-- 删除语句 -->
+    <select id="deleteMulti" resultType="java.lang.Integer" useCache="true" >
+        DELETE FROM ${bean.tableName} WHERE <%for(entry in bean.primaryAttributeContext){if(entryLP.index==1){%>${entry.key}<%}}%> IN
+        <foreach item="item" index="index" collection="primaryKeys" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 删除语句 -->
+    <select id="deleteList" parameterType="java.util.Map" resultType="${bean.className}" useCache="true" >
+        DELETE FROM ${bean.tableName} WHERE <include refid="whereCondition"/>
+    </select>
+
+    <!-- 更新条件 -->
+    <update id="update" parameterType="${bean.className}">
+        UPDATE ${bean.tableName} <include refid="setCondition"/> <include refid="whereCondition"/>
+    </update>
+
+    <!-- 聚合语句 -->
+    <select id="count" parameterType="${bean.className}" resultType="java.lang.Long" useCache="true" >
+        SELECT COUNT(0) FROM ${bean.tableName} <include refid="whereCondition"/>
+    </select>
+
+    <!-- 查询语句 -->
+    <select id="select" parameterType="java.lang.Long" resultType="${bean.className}" useCache="true" >
+        SELECT <include refid="resultCondition"/> FROM ${bean.tableName} WHERE <%for(entry in bean.primaryAttributeContext){if(entryLP.index==1){%>${entry.key}=#{primaryKey}<%}}%>
+    </select>
+
+    <!-- 查询语句 -->
+    <select id="selectMulti" parameterType="java.util.Map" resultType="${bean.className}" useCache="true" >
+        SELECT <include refid="resultCondition"/> FROM ${bean.tableName} WHERE <%for(entry in bean.primaryAttributeContext){if(entryLP.index==1){%>${entry.key}<%}}%> IN
+        <foreach collection="primaryKeys" item="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+        <include refid="sortByCondition"/>
+    </select>
+
+    <!-- 查询语句 -->
+    <select id="selectList" resultType="${bean.className}" useCache="true" >
+        SELECT <include refid="resultCondition"/> FROM ${bean.tableName} <include refid="whereCondition"/> <include refid="sortByCondition"/>
+    </select>
+
+    <!-- 查询语句 -->
+    <select id="selectPage" resultType="${bean.className}" useCache="true" >
+        SELECT <include refid="resultCondition"/> FROM ${bean.tableName} <include refid="whereCondition"/> LIMIT #{offset},#{size}
+    </select>
+
+
+    <!-- 插入条件 -->
+    <sql id="insertCondition">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <%
+            for(entry in bean.plainAttributeContext){
+            if(entryLP.index < bean.plainAttributeContext.~size){
+            %>
+            <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                ${entry.value.columnName},
+            </if>
+            <%
+            }else{
+            %>
+            <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                ${entry.value.columnName}
+            </if>
+            <%
+            }
+            }
+            %>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <%
+            for(entry in bean.plainAttributeContext){
+            if(entryLP.index < bean.plainAttributeContext.~size){
+            %>
+            <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                #{object.${entry.key}}
+            </if>
+            <%
+            }else{
+            %>
+            <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                #{object.${entry.key}}
+            </if>
+            <%
+            }
+            }
+            %>
+        </trim>
+    </sql>
+
+
+    <!-- 查询条件 -->
+    <sql id="whereCondition">
+        <trim prefix="where" prefixOverrides="AND |OR">
+            <choose>
+                <%
+                for(entry in bean.primaryAttributeContext){
+                %>
+                <when test="object.${entry.key} != null and object.${entry.key} !=''">
+                    AND ${entry.value.columnName} = #{object.${entry.key}}
+                </when>
+                <%
+                }
+                %>
+                <otherwise>
+                    <%
+                    for(entry in bean.plainAttributeContext){
+                    %>
+                    <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                        AND ${entry.value.columnName} = #{object.${entry.key}}
+                    </if>
+                    <%
+                    }
+                    %>
+                </otherwise>
+            </choose>
+        </trim>
+    </sql>
+
+    <!-- 表字段和对象属性映射 -->
+    <sql id="resultCondition">
+        <trim suffixOverrides=",">
+            <%
+            for(entry in bean.primaryAttributeContext){
+            %>
+            ${entry.value.columnName} AS ${entry.key},
+            <%
+            }
+            %>
+            <%
+            for(entry in bean.plainAttributeContext){
+            if(entryLP.index < bean.plainAttributeContext.~size){
+            %>
+            ${entry.value.columnName} AS ${entry.key} ,
+            <%
+            }else{
+            %>
+            ${entry.value.columnName} AS ${entry.key}
+            <%
+            }
+            }
+            %>
+        </trim>
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="sortByCondition">
+        <trim suffixOverrides=",">
+        <%
+          for(entry in bean.primaryAttributeContext){
+            if(entryLP.index == 1){
+        %>
+            ${entry.value.columnName} DESC
+        <%
+            }
+          }
+        %>
+        </trim>
+    </sql>
+
+    <!-- 表字段校验 -->
+    <sql id="setCondition">
+        <set>
+            <trim suffixOverrides=",">
+                <%
+                for(entry in bean.plainAttributeContext){
+                if(entryLP.index < bean.plainAttributeContext.~size){
+                %>
+                <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                    ${entry.value.columnName} = #{object.${entry.key}},
+                </if>
+                <%
+                }else{
+                %>
+                <if test="object.${entry.key} != null and object.${entry.key} !=''">
+                    ${entry.value.columnName} = #{object.${entry.key}}
+                </if>
+                <%
+                }
+                }
+                %>
+            </trim>
+        </set>
+    </sql>
+
+</mapper>

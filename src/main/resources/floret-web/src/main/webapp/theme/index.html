@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head ng-controller="settingInit">
+    <meta charset="utf-8"/>
+    <title>{{title}}</title>
+    <meta name="description" content="data tables" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="bootstrap-rtl-link" href="" rel="stylesheet" />
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/css/weather-icons.min.css" rel="stylesheet" />
+    <link href="/assets/css/beyond.min.css" rel="stylesheet" />
+    <link href="/assets/css/demo.min.css" rel="stylesheet" />
+    <link href="/assets/css/typicons.min.css" rel="stylesheet" />
+    <link href="/assets/css/animate.min.css" rel="stylesheet" />
+    <link id="skin-link" href="" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/dataTables.bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+<div class="loading-container">
+    <div class="loading-progress">
+        <div class="rotator">
+            <div class="rotator">
+                <div class="rotator colored">
+                    <div class="rotator">
+                        <div class="rotator colored">
+                            <div class="rotator colored"></div>
+                            <div class="rotator"></div>
+                        </div>
+                        <div class="rotator colored"></div>
+                    </div>
+                    <div class="rotator"></div>
+                </div>
+                <div class="rotator"></div>
+            </div>
+            <div class="rotator"></div>
+        </div>
+        <div class="rotator"></div>
+    </div>
+</div>
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <img src="/assets/img/logo.png" alt="后台管理" />
+                    </small>
+                </a>
+            </div>
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="collapse-icon fa fa-bars"></i>
+            </div>
+            <div class="navbar-header pull-right">
+                <div class="navbar-account">
+                    <ul class="account-area">
+                        <li>
+                            <a class="wave in dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                <i class="icon fa fa-envelope"></i>
+                                <span class="badge">3</span>
+                            </a>
+                            <ul class="pull-right dropdown-menu dropdown-arrow dropdown-messages">
+                                <li>
+                                    <a href="#">
+                                        <img src="/assets/img/avatars/divyia.jpg" class="message-avatar" alt="Divyia Austin">
+                                        <div class="message">
+                                            <span class="message-sender">
+                                                备份通知
+                                            </span>
+                                            <span class="message-time">
+                                                2 分钟前
+                                            </span>
+                                            <span class="message-subject">
+                                                数据备份通知
+                                            </span>
+                                            <span class="message-body">
+                                                亲爱的管理员:苏若年,该月数据备份已经备份完成,请知晓.
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="/assets/img/avatars/bing.png" class="message-avatar" alt="Microsoft Bing">
+                                        <div class="message">
+                                            <span class="message-sender">
+                                                投诉通知
+                                            </span>
+                                            <span class="message-time">
+                                                昨天
+                                            </span>
+                                            <span class="message-subject">
+                                                网站数据涉及个人版权
+                                            </span>
+                                            <span class="message-body">
+                                                你好,贵站数据因涉及了违法转载内容,请及时处理.
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                <div class="avatar" title="点击头像设置">
+                                    <img src="/assets/img/avatars/admin-avatar.png">
+                                </div>
+                                <section>
+                                    <h2><span class="profile"><span>苏若年</span></span></h2>
+                                </section>
+                            </a>
+                            <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                <li class="username"><a>苏若年</a></li>
+                                <li class="email"><a>dennisit@163.com</a></li>
+                                <li class="edit">
+                                    <a href="profile.html" class="pull-left">个人中心</a>
+                                    <a href="#" class="pull-right">主题</a>
+                                </li>
+                                <li class="theme-area">
+                                    <ul class="colorpicker" id="skin-changer">
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#5DB2FF;" rel="/assets/css/skins/blue.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#2dc3e8;" rel="/assets/css/skins/azure.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#03B3B2;" rel="/assets/css/skins/teal.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#53a93f;" rel="/assets/css/skins/green.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#FF8F32;" rel="/assets/css/skins/orange.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#cc324b;" rel="/assets/css/skins/pink.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#AC193D;" rel="/assets/css/skins/darkred.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#8C0095;" rel="/assets/css/skins/purple.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#0072C6;" rel="/assets/css/skins/darkblue.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#585858;" rel="/assets/css/skins/gray.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#474544;" rel="/assets/css/skins/black.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#001940;" rel="/assets/css/skins/deepblue.min.css"></a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-footer">
+                                    <a href="/signOut.json">退出系统</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="setting">
+                        <a id="btn-setting" title="设置" href="#">
+                            <i class="icon glyphicon glyphicon-cog"></i>
+                        </a>
+                    </div>
+                    <div class="setting-container">
+                    <label>
+                        <input type="checkbox" id="checkbox_fixednavbar">
+                        <span class="text">固定导航</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="checkbox_fixedsidebar">
+                        <span class="text">固定菜单</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="checkbox_fixedbreadcrumbs">
+                        <span class="text">固定面包屑</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="checkbox_fixedheader">
+                        <span class="text">固定页面标题</span>
+                    </label>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-container container-fluid">
+    <div class="page-container">
+        <div class="page-sidebar" id="sidebar">
+            <div class="sidebar-header-wrapper">
+                <input type="text" class="searchinput" />
+                <i class="searchicon fa fa-search"></i>
+                <div class="searchhelper">搜索作品</div>
+            </div>
+            <ul class="nav sidebar-menu">
+                <li>
+                    <a href="javascript:void(0);">
+                        <i class="menu-icon glyphicon glyphicon-home"></i>
+                        <span class="menu-text"> 快捷面板 </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-bar-chart-o"></i>
+                        <span class="menu-text"> 系统管理 </span>
+                        <i class="menu-expand"></i>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="flot.html">
+                                <span class="menu-text">系统菜单树</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-dropdown">
+                                <span class="menu-text">系统管理员</span>
+                                <i class="menu-expand"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="font-awesome.html">
+                                        <i class="menu-icon fa fa-rocket"></i>
+                                        <span class="menu-text">超级管理员</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="glyph-icons.html">
+                                        <i class="menu-icon glyphicon glyphicon-stats"></i>
+                                        <span class="menu-text">普通管理员</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="flot.html">
+                                <span class="menu-text">数据备份</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-picture-o"></i>
+                        <span class="menu-text"> 个人设置 </span>
+
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="flot.html">
+                                <span class="menu-text">个人信息</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="morris.html">
+                                <span class="menu-text">修改密码</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">管理系统</a>
+                    </li>
+                    <li>
+                        <a href="#">导航</a>
+                    </li>
+                    <li class="active">Floret后台</li>
+                </ul>
+            </div>
+            <div class="page-header position-relative">
+                <div class="header-buttons">
+                    <a class="sidebar-toggler" href="#">
+                        <i class="fa fa-arrows-h"></i>
+                    </a>
+                    <a class="fullscreen" id="fullscreen-toggler" href="#">
+                        <i class="glyphicon glyphicon-fullscreen"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="page-body">
+                <div ui-view="mainView"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/skins.min.js"></script>
+<script src="/assets/js/beyond.min.js"></script>
+<script type="text/javascript" src="/assets/js/angularJs/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="/assets/js/angularJs/1.4.6/angular-route.min.js"></script>
+<script type="text/javascript" src="/assets/js/angularJs/1.5.0-beta.0/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="/assets/js/angularJs/angular-ui-router-0.2.15.js"></script>
+<script type="text/javascript" src="/platon/bootstrap.floret.jquery.js"></script>
+<script type="text/javascript" src="/platon/bootstrap.floret.admin.js"></script>
+</body>
+</html>

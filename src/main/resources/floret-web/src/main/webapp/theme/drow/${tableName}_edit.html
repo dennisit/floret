@@ -1,0 +1,46 @@
+<div class="row" ng-controller="${nameUtil.firstToLower(bean.className)}DataZone">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget  radius-bordered">
+            <div class="widget-header">
+                <span class="widget-caption">数据操作</span>
+            </div>
+            <div class="widget-body">
+                <form id="togglingForm" method="post" class="form-horizontal">
+                    <%
+                    for(entry in bean.primaryAttributeContext){
+                    %>
+                    <div class="form-group" ng-show="optUpdate">
+                        <label class="col-lg-2 control-label">${entry.value.displayName} <sup>*</sup></label>
+                        <div class="col-lg-8">
+                            <input type="text" value="{{item.${entry.key}}}" ng-model="item.${entry.key}" class="form-control" name="${entry.key}" placeholder="${entry.value.displayName}"/>
+                        </div>
+                    </div>
+                    <%
+                    }
+                    %>
+                    <hr class="wide" ng-show="optUpdate" />
+                    <%
+                    for(entry in bean.plainAttributeContext){
+                    %>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">${entry.value.displayName} <sup>*</sup></label>
+                        <div class="col-lg-8">
+                            <input type="text" value="{{item.${entry.key}}}" ng-model="item.${entry.key}" class="form-control" name="${entry.key}" placeholder="${entry.value.displayName}"/>
+                        </div>
+                    </div>
+                    <%
+                    }
+                    %>
+                    <hr class="wide" />
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-4">
+                            <button type="submit" ng-click="returnFunction();" class="btn btn-warning">返回</button>
+                            <button type="submit" ng-click="insertFunction();" ng-show="optInsert" class="btn btn-success">添加</button>
+                            <button type="submit" ng-click="updateFunction();" ng-show="optUpdate" class="btn btn-success">修改</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
